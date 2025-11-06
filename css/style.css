@@ -309,36 +309,6 @@ nav ul li a:active {
   }
 }
 
-
-/* Projects */
-#projects{
-  background-color: #d9d9f3;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.project-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #eee;
-  transition: 0.3s;
-}
-
-.project-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 5px 15px rgba(0, 170, 255, 0.2);
-}
-
-.project-card h3 {
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
 #contact {
   text-align: center;
   justify-items: center;
@@ -420,4 +390,78 @@ footer {
 .hero-img {
   order: 2; /* move image to the left */
 }
+}
+
+/* Project animation*/
+.projects-vertical-carousel {
+  height: 300px; /* height of one row */
+  overflow: hidden;
+  position: relative;
+}
+
+.row img{
+  width: 100px;
+}
+
+.projects-vertical-carousel .row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: absolute;
+  width: 100%;
+  top: 100%; /* start below */
+  opacity: 0;
+  transition: top 1s ease, opacity 1s ease;
+  
+}
+
+.projects-vertical-carousel .row.active {
+  top: 0;
+  opacity: 1;
+}
+
+.projects-vertical-carousel .row.prev {
+  top: -100%;
+  opacity: 0.5;
+}
+
+.project-card {
+  flex: 0 0 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.projects-vertical-carousel .row {
+  pointer-events: none; /* all rows ignore mouse by default */
+}
+
+.projects-vertical-carousel .row.active {
+  pointer-events: auto; /* only the active row can receive hover */
+}
+
+@media (max-width: 768px) {
+  .projects-vertical-carousel {
+    height: 250px; /* slightly smaller for mobile */
+  }
+
+  .projects-vertical-carousel .row {
+    flex-direction: column; /* stack vertically */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .project-card {
+    width: 90%; /* full width with margins */
+    flex: none;
+    font-size: small;
+    padding: 15px;
+  }
+
+  .row img {
+    width: 80px; /* smaller image */
+  }
 }
